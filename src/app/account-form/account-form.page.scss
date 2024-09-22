@@ -1,0 +1,29 @@
+ion-content {
+  --background: #ffffff;
+}
+
+ion-toolbar{
+  --background: #ffffff;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 10px;
+}
+
+.title{
+  margin-top: 1rem;
+  color: #004B40;
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+.logo{
+  width: auto;
+  height: auto;
+  padding: 1rem;
+}
