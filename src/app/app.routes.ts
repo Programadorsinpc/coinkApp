@@ -22,4 +22,12 @@ export const routes: Routes = [
     path: 'account-form',
     loadComponent: () => import('./pages/account-form/account-form.page').then( m => m.AccountFormPage)
   },
+  {
+    path: 'contract',
+    loadComponent: () => import('./page/contract/contract.page').then( m => m.ContractPage)
+  },
+  {
+    path: 'contract',
+    loadComponent: () => import('./pages/contract/contract.page').then( m => m.ContractPage)
+  },
 ];
