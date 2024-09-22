@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -10,6 +10,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-account-form',
@@ -20,6 +21,7 @@ import { IonicModule } from '@ionic/angular';
 })
 export class AccountFormPage implements OnInit {
   accountForm!: FormGroup;
+  private userDataService = inject(UserDataService);
 
   constructor() {}
 
@@ -82,8 +84,16 @@ export class AccountFormPage implements OnInit {
   // Función de envío de formulario
   onSubmit() {
     if (this.accountForm.valid) {
-      // Aquí iría la lógica para enviar los datos al backend
-      console.log(this.accountForm.value);
+
+      //console.log(this.accountForm.value);
+      this.userDataService.setAccountData({
+        docType: this.accountForm.value.docType,
+        docNumber: this.accountForm.value.docNumber,
+        docBirthDate: this.accountForm.value.docBirthDate,
+        gender: this.accountForm.value.gender,
+        email: this.accountForm.value.email,
+        pin: this.accountForm.value.pin,
+      });
     }
   }
 }
