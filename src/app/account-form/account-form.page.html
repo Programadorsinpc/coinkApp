@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="medium" defaultHref="/phone-number"></ion-back-button>
+      <ion-back-button
+        color="medium"
+        defaultHref="/phone-number"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title>
       <div class="progress-container">
@@ -12,10 +15,140 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">account-form</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [scrollEvents]="true">
+  <div class="piggy-container">
+    <img src="../../assets/img/oink-m.svg" alt="Icon" class="piggy-icon" />
+    <!-- Icono de cerdito -->
+    <div class="">
+      <p class="text-title">¿CUÁLES SON TUS DATOS?</p>
+      <p class="text-instruction">
+        Ahora necesitamos saber algunos datos tuyos
+      </p>
+    </div>
+  </div>
+
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <div class="account-data-container">
+      <ion-label>Documento de identidad</ion-label>
+
+      <ion-item>
+        <ion-select
+          label="Tipo de documento"
+          label-placement="floating"
+          formControlName="tipoDocumento"
+          placeholder="Seleccione"
+          interface="popover"
+        >
+          <ion-select-option value="ti">Tarjeta de identidad</ion-select-option>
+          <ion-select-option value="cc">Cédula de ciudadanía</ion-select-option>
+          <ion-select-option value="ce"
+            >Cédula de extranjería</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="input-number"
+          formControlName="numeroDocumento"
+          label="Número de documento"
+          labelPlacement="floating"
+          placeholder=""
+          maxlength="10"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="date"
+          formControlName="fechaExpDocumento"
+          label="Fecha de expedición del documento"
+          labelPlacement="floating"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="date"
+          formControlName="fechaNacimiento"
+          label="Fecha de nacimiento"
+          labelPlacement="floating"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-select
+          label="Género"
+          label-placement="floating"
+          formControlName="gender"
+          placeholder="Seleccione"
+          interface="popover"
+        >
+          <ion-select-option value="masculino">Masculino</ion-select-option>
+          <ion-select-option value="femenino">Femenino</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <hr />
+
+      <ion-label>Configura tu cuenta</ion-label>
+
+      <ion-item>
+        <ion-input
+          type="email"
+          formControlName="email"
+          label="Correo electrónico"
+          labelPlacement="floating"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="email"
+          formControlName="confirmEmail"
+          label="Confirmar correo electrónico"
+          labelPlacement="floating"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="password"
+          formControlName="pin"
+          label="PIN de seguridad"
+          labelPlacement="floating"
+          maxlength="4"
+        >
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="password"
+          formControlName="confirmPin"
+          label="Confirmar PIN de seguridad"
+          labelPlacement="floating"
+          maxlength="4"
+        >
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <hr />
+
+      <!-- !datosCuentaForm.valid -->
+      <!-- <ion-button
+        expand="block"
+        class="submit-button"
+        [disabled]="!datosCuentaForm.valid"
+        >Siguiente</ion-button
+      > -->
+    </div>
+    <div class="button">
+      <button type="submit" class="button-next" [disabled]="">
+        SIGUIENTE
+      </button>
+    </div>
+  </form>
 </ion-content>

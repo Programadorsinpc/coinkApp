@@ -26,4 +26,85 @@ ion-toolbar{
   width: auto;
   height: auto;
   padding: 1rem;
+  margin-right: 1rem;
+}
+
+.piggy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1EEA00;
+}
+
+.text-title{
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  color: #004B40;
+  font-family: 'Montserrat';
+  white-space: nowrap;
+}
+
+.text-instruction {
+  font-size: 16px;
+  text-align: center;
+  color: #004b40;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+ion-item {
+  --background: transparent;
+  font-size: 16px;
+  padding: 0 1rem 0 1rem;
+}
+
+
+ion-select{
+  font-family: 'Montserrat';
+  font-weight: 500;
+}
+
+ion-input{
+  font-family: 'Montserrat';
+}
+
+.account-data-container{
+  background-color: #ffffff;
+  padding-top: 32px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+ion-label {
+  color: #004B40;
+  font-weight: bold;
+  margin-left: 16px;
+  font-size: 16px;
+  font-family: 'Montserrat';
+}
+
+.button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-next {
+  align-items: center;
+  background-color: #1EEA00;
+  color: #004B40;
+  display: inline-flex;
+  font-size: 16pt;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  width: 40vh;
+  height: 32pt;
+  border-radius: 40pt;
 }
