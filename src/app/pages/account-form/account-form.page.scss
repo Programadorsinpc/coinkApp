@@ -74,7 +74,6 @@ ion-input{
 .account-data-container{
   background-color: #ffffff;
   padding-top: 32px;
-  justify-content: center;
   display: flex;
   flex-direction: column;
 }
@@ -102,9 +101,18 @@ ion-label {
   font-size: 16pt;
   font-weight: bold;
   padding: 20px;
+  margin-bottom: 20px;
   text-align: center;
   justify-content: center;
   width: 40vh;
   height: 32pt;
   border-radius: 40pt;
+}
+
+.error-text{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 11px;
+  font-family: 'Montserrat';
+  color: red;
 }
