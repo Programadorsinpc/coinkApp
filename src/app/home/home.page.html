@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Blank
@@ -16,5 +16,20 @@
   <div id="container">
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div>
+</ion-content> -->
+
+<ion-content>
+  <div class="home-container">
+    <div class="logo-container">
+      <img src="../../assets/img/logo.svg" alt="Logo" class="logo" />
+      <span class="sub-label">LA ALCANCÍA QUE SIEMPRE TE ACOMPAÑA</span>
+    </div>
+    <div class="button-group">
+      <button type="button" class="button-register" (click)="goToRegister()">
+        Regístrate
+      </button>
+      <button type="button" class="button-login">Ingresa</button>
+    </div>
   </div>
 </ion-content>
