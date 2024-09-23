@@ -1,4 +1,4 @@
-import { Component, inject, Inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -13,6 +13,8 @@ import { IonicModule } from '@ionic/angular';
 import { UserDataService } from 'src/app/services/user-data.service';
 import { Router } from '@angular/router';
 import { UserData } from 'src/app/models/userData.model';
+import { ApiService } from 'src/app/services/api.service';
+import { RequestStatus } from 'src/app/models/api.model';
 
 @Component({
   selector: 'app-account-form',
@@ -22,13 +24,29 @@ import { UserData } from 'src/app/models/userData.model';
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class AccountFormPage implements OnInit {
+  status = signal<RequestStatus>('init');
   accountForm!: FormGroup;
   isLoading = false;
   private userDataService = inject(UserDataService);
+  private router = inject(Router);
+  private apiService = inject(ApiService);
 
-  constructor(private router: Router) {}
+  documentTypes: string[] = [];
+  genders: string[] = [];
+  errorMessage = signal<string | null>(null); 
 
   ngOnInit() {
+    try {
+      this.initForm();
+      this.loadUserData();
+      this.fetchDocumentTypes();
+      this.fetchGenders();
+    } catch (error) {
+      this.handleError("Error inicializando la página", error);
+    }
+  }
+
+  private initForm() {
     this.accountForm = new FormGroup(
       {
         docType: new FormControl('', Validators.required),
@@ -62,23 +80,71 @@ export class AccountFormPage implements OnInit {
         ],
       }
     );
-    this.loadUserData();
+  }
+
+  private fetchDocumentTypes() {
+    try {
+      this.status.set('loading');
+      this.apiService.getDocumentTypes()?.subscribe({
+        next: (response) => {
+          console.log(response);
+          this.documentTypes = response.data;
+          this.status.set('success');
+        },
+        error: (error) => {
+          this.handleError("Error obteniendo tipos de documento", error);
+        },
+        complete: () => this.status.set('init'),
+      });
+    } catch (error) {
+      this.handleError("Error en la solicitud de tipos de documento", error);
+    }
+  }
+
+  private fetchGenders() {
+    try {
+      this.status.set('loading');
+      this.apiService.getGenders()?.subscribe({
+        next: (response) => {
+          console.log(response);
+          this.genders = response.data;
+          this.status.set('success');
+        },
+        error: (error) => {
+          this.handleError("Error obteniendo géneros", error);
+        },
+        complete: () => this.status.set('init'),
+      });
+    } catch (error) {
+      this.handleError("Error en la solicitud de géneros", error);
+    }
   }
 
   loadUserData(): void {
-    const userData: UserData | null = this.userDataService.getUserData();
+    try {
+      const userData: UserData | null = this.userDataService.getUserData();
 
-    if (userData) {
-      this.accountForm.patchValue({
-        docType: userData.docType,
-        docNumber: userData.docNumber,
-        docExpeditionDate: userData.docExpeditionDate,
-        docBirthDate: userData.docBirthDate,
-        gender: userData.gender,
-        email: userData.email,
-        pin: userData.pin,
-      });
+      if (userData) {
+        this.accountForm.patchValue({
+          docType: userData.docType,
+          docNumber: userData.docNumber,
+          docExpeditionDate: userData.docExpeditionDate,
+          docBirthDate: userData.docBirthDate,
+          gender: userData.gender,
+          email: userData.email,
+          pin: userData.pin,
+        });
+      }
+    } catch (error) {
+      this.handleError("Error cargando datos del usuario", error);
     }
+  }
+
+  // Método para manejar errores y mostrar mensajes
+  private handleError(message: string, error: any): void {
+    console.error(`${message}:`, error);
+    this.status.set('failed');
+    this.errorMessage.set(`${message}: ${error.message || error}`);
   }
 
   // Función que retorna un ValidatorFn y compara dos campos
@@ -90,33 +156,34 @@ export class AccountFormPage implements OnInit {
 
       if (!control1 || !control2) return null;
 
-      // Verifica si los valores de los dos campos coinciden
       if (control1.value !== control2.value) {
-        // Devuelve un objeto con el error si no coinciden
         return { notMatch: true };
       }
 
-      // Si coinciden, devuelve null indicando que no hay errores
       return null;
     };
   }
 
   // Función de envío de formulario
   onSubmit() {
-    // if (this.accountForm.valid) {
-    //   //console.log(this.accountForm.value);
-    //   this.userDataService.setAccountData({
-    //     docType: this.accountForm.value.docType,
-    //     docNumber: this.accountForm.value.docNumber,
-    //     docExpeditionDate: this.accountForm.value.docExpeditionDate,
-    //     docBirthDate: this.accountForm.value.docBirthDate,
-    //     gender: this.accountForm.value.gender,
-    //     email: this.accountForm.value.email,
-    //     pin: this.accountForm.value.pin,
-    //   });
+    try {
+      if (this.accountForm.valid) {
+        this.userDataService.setAccountData({
+          docType: this.accountForm.value.docType,
+          docNumber: this.accountForm.value.docNumber,
+          docExpeditionDate: this.accountForm.value.docExpeditionDate,
+          docBirthDate: this.accountForm.value.docBirthDate,
+          gender: this.accountForm.value.gender,
+          email: this.accountForm.value.email,
+          pin: this.accountForm.value.pin,
+        });
 
-    //   this.router.navigateByUrl('/contract');
-    // }
-    this.router.navigateByUrl('/contract');
+        this.router.navigateByUrl('/contract');
+      } else {
+        this.handleError("Formulario inválido", new Error("Campos incompletos o erróneos"));
+      }
+    } catch (error) {
+      this.handleError("Error al enviar el formulario", error);
+    }
   }
 }

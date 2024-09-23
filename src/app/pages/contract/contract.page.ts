@@ -14,8 +14,7 @@ import { Router } from '@angular/router';
 export class ContractPage implements OnInit {
   private userDataService = inject(UserDataService);
   acceptContract: boolean = false;
-
-  constructor(private router: Router){}
+  private router = inject(Router);
 
   ngOnInit() {
     // Cargar el estado inicial de acceptTerms desde el servicio, si está definido

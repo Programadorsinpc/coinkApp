@@ -16,12 +16,18 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true">
-
   <ion-loading
-  [isOpen]="isLoading"
-  message="Por favor espera..."
-  spinner="crescent">
-</ion-loading>
+    [isOpen]="status() === 'loading'"
+    message="Por favor espera..."
+    spinner="crescent"
+  ></ion-loading>
+
+  <!-- Mostrar mensaje de error global si existe -->
+  <div *ngIf="errorMessage()" class="error-global">
+    <ion-text color="danger">
+      <p>{{ errorMessage() }}</p>
+    </ion-text>
+  </div>
 
   <div class="piggy-container">
     <img src="../../assets/img/oink-m.svg" alt="Icon" class="piggy-icon" />
@@ -46,6 +52,10 @@
             placeholder="Seleccione"
             interface="popover"
           >
+            @if (documentTypes.length > 0) { @for(doc of documentTypes; track
+            doc){
+            <ion-select-option [value]="doc">{{doc}}</ion-select-option>
+            } }@else {
             <ion-select-option value="ti"
               >Tarjeta de identidad</ion-select-option
             >
@@ -55,6 +65,7 @@
             <ion-select-option value="ce"
               >Cédula de extranjería</ion-select-option
             >
+            }
           </ion-select>
         </ion-item>
         <p
@@ -127,8 +138,12 @@
             placeholder="Seleccione"
             interface="popover"
           >
+            @if (genders.length>0) { @for(gender of genders; track gender){
+            <ion-select-option [value]="gender">{{gender}}</ion-select-option>
+            } }@else {
             <ion-select-option value="masculino">Masculino</ion-select-option>
             <ion-select-option value="femenino">Femenino</ion-select-option>
+            }
           </ion-select>
         </ion-item>
         <p
@@ -173,7 +188,7 @@
           [ngStyle]="{'visibility': accountForm.hasError('notMatch') && accountForm.get('confirmEmail')?.touched ? 'visible' : 'hidden'}"
           class="error-text"
         >
-        Este campo no coincide con el correo electronico
+          Este campo no coincide con el correo electrónico
         </p>
       </div>
 
@@ -229,8 +244,6 @@
         }"
         class="button-next"
       >
-        <!-- [disabled]="!accountForm.valid" -->
-
         SIGUIENTE
       </button>
     </div>
