@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserDataService } from 'src/app/services/user-data.service';
+import { Router } from '@angular/router';
+import { UserData } from 'src/app/models/userData.model';
 
 @Component({
   selector: 'app-account-form',
@@ -23,7 +25,7 @@ export class AccountFormPage implements OnInit {
   accountForm!: FormGroup;
   private userDataService = inject(UserDataService);
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.accountForm = new FormGroup(
@@ -59,6 +61,23 @@ export class AccountFormPage implements OnInit {
         ],
       }
     );
+    this.loadUserData();
+  }
+
+  loadUserData(): void {
+    const userData: UserData | null = this.userDataService.getUserData();
+
+    if (userData) {
+      this.accountForm.patchValue({
+        docType: userData.docType,
+        docNumber: userData.docNumber,
+        docExpeditionDate: userData.docExpeditionDate,
+        docBirthDate: userData.docBirthDate,
+        gender: userData.gender,
+        email: userData.email,
+        pin: userData.pin,
+      });
+    }
   }
 
   // Función que retorna un ValidatorFn y compara dos campos
@@ -83,17 +102,20 @@ export class AccountFormPage implements OnInit {
 
   // Función de envío de formulario
   onSubmit() {
-    if (this.accountForm.valid) {
+    // if (this.accountForm.valid) {
+    //   //console.log(this.accountForm.value);
+    //   this.userDataService.setAccountData({
+    //     docType: this.accountForm.value.docType,
+    //     docNumber: this.accountForm.value.docNumber,
+    //     docExpeditionDate: this.accountForm.value.docExpeditionDate,
+    //     docBirthDate: this.accountForm.value.docBirthDate,
+    //     gender: this.accountForm.value.gender,
+    //     email: this.accountForm.value.email,
+    //     pin: this.accountForm.value.pin,
+    //   });
 
-      //console.log(this.accountForm.value);
-      this.userDataService.setAccountData({
-        docType: this.accountForm.value.docType,
-        docNumber: this.accountForm.value.docNumber,
-        docBirthDate: this.accountForm.value.docBirthDate,
-        gender: this.accountForm.value.gender,
-        email: this.accountForm.value.email,
-        pin: this.accountForm.value.pin,
-      });
-    }
+    //   this.router.navigateByUrl('/contract');
+    // }
+    this.router.navigateByUrl('/contract');
   }
 }

@@ -24,10 +24,6 @@ export const routes: Routes = [
   },
   {
     path: 'contract',
-    loadComponent: () => import('./page/contract/contract.page').then( m => m.ContractPage)
-  },
-  {
-    path: 'contract',
     loadComponent: () => import('./pages/contract/contract.page').then( m => m.ContractPage)
   },
 ];

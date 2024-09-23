@@ -1,0 +1,112 @@
+ion-content {
+  --background: #ffffff;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 10px;
+}
+
+.title {
+  margin-top: 1rem;
+  color: #004b40;
+  font-size: 16pt;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.logo {
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin-right: 1rem;
+}
+
+.piggy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px;
+  border-bottom: 1px solid #1eea00;
+}
+
+.text-title {
+  font-size: 16px;
+  text-align: left;
+  font-weight: bold;
+  color: #004b40;
+  font-family: "Montserrat";
+}
+
+.text-instruction {
+  font-size: 16px;
+  text-align: left;
+  color: #004b40;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.piggy-icon {
+  width: 100px;
+  height: auto;
+  padding-right: 1rem;
+}
+
+.contract-container {
+  display: flex;
+  flex-direction: column;
+  margin: 32px;
+}
+
+.contract-section {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.contract-title {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #004B40; // Un verde oscuro para el título
+  margin-bottom: 10px;
+}
+
+ion-checkbox {
+  --background: transparent;
+  --icon-color-checked: #fff;
+  color: #004B40;
+  font-family: 'Montserrat';
+  white-space: normal;
+  font-size: 16px;
+}
+
+.button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+.button-accept {
+  align-items: center;
+  background-color: #1EEA00;
+  color: #004B40;
+  display: inline-flex;
+  font-size: 16pt;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  width: 40vh;
+  height: 32pt;
+  border-radius: 40pt;
+}
