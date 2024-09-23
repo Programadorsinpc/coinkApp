@@ -1,0 +1,19 @@
+<ion-content>
+  <!-- Modal de éxito -->
+  <ion-modal [isOpen]="isModalOpen"
+             backdropDismiss="false"
+             cssClass="custom-modal">
+    <ng-template>
+      <div class="modal-content">
+        <img src="../../assets/img/marrano-regalo.svg" alt="Gift icon" class="success-icon">
+        <p class="success-title">¡Bienvenido a Coink!</p>
+        <p class="success-message">
+          ¡Cuenta creada exitosamente, tu marrano ya está listo para que empieces a ahorrar!
+        </p>
+        <button ion-button (click)="closeModal()" class="continue-button">
+          CONTINUAR
+        </button>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>

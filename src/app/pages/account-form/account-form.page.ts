@@ -23,6 +23,7 @@ import { UserData } from 'src/app/models/userData.model';
 })
 export class AccountFormPage implements OnInit {
   accountForm!: FormGroup;
+  isLoading = false;
   private userDataService = inject(UserDataService);
 
   constructor(private router: Router) {}

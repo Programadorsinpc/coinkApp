@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { UserDataService } from '../../services/user-data.service'; // Importamos el servicio
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contract',
@@ -13,6 +14,8 @@ import { UserDataService } from '../../services/user-data.service'; // Importamo
 export class ContractPage implements OnInit {
   private userDataService = inject(UserDataService);
   acceptContract: boolean = false;
+
+  constructor(private router: Router){}
 
   ngOnInit() {
     // Cargar el estado inicial de acceptTerms desde el servicio, si está definido
@@ -29,6 +32,7 @@ export class ContractPage implements OnInit {
   onClickButton(){
     if(this.acceptContract){
       this.userDataService.acceptTerms();
+      this.router.navigateByUrl('/welcome')
     }
   }
 }

@@ -16,6 +16,13 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true">
+
+  <ion-loading
+  [isOpen]="isLoading"
+  message="Por favor espera..."
+  spinner="crescent">
+</ion-loading>
+
   <div class="piggy-container">
     <img src="../../assets/img/oink-m.svg" alt="Icon" class="piggy-icon" />
     <div>

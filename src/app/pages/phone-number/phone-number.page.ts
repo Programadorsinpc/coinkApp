@@ -17,6 +17,7 @@ import {
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { UserDataService } from 'src/app/services/user-data.service';
+import { UserData } from 'src/app/models/userData.model';
 
 @Component({
   selector: 'app-phone-number',
@@ -46,7 +47,17 @@ export class PhoneNumberPage {
   phoneNumber: string = ''; // Variable para almacenar el número de teléfono
   isValid: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+
+  }
+
+  loadPhoneNumber(): void {
+    const userData: UserData | null = this.userDataService.getUserData();
+
+    if (userData?.phoneNumber) {
+      this.phoneNumber = userData?.phoneNumber.toString()
+    }
+  }
 
   // Método para agregar un número al input
   addNumber(num: string) {

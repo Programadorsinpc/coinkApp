@@ -56,9 +56,16 @@
       >
     </div>
     <div class="button">
-      <button type="button" (click)="onClickButton()" class="button-accept">
-        <!-- [disabled]="!accountForm.valid" -->
-
+      <button
+        [ngStyle]="{
+          'background-color': acceptContract ? '#1EEA00' : '#EEEEEE',
+          'color': acceptContract ? '#004B40' : '#757575'
+        }"
+        [disabled]="!acceptContract"
+        type="button"
+        (click)="onClickButton()"
+        class="button-accept"
+      >
         ACEPTAR
       </button>
     </div>
