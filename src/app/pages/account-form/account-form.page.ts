@@ -140,14 +140,12 @@ export class AccountFormPage implements OnInit {
     }
   }
 
-  // Método para manejar errores y mostrar mensajes
   private handleError(message: string, error: any): void {
     console.error(`${message}:`, error);
     this.status.set('failed');
     this.errorMessage.set(`${message}: ${error.message || error}`);
   }
 
-  // Función que retorna un ValidatorFn y compara dos campos
   matchingFields(field1: string, field2: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const formGroup = control as FormGroup;
@@ -164,7 +162,6 @@ export class AccountFormPage implements OnInit {
     };
   }
 
-  // Función de envío de formulario
   onSubmit() {
     try {
       if (this.accountForm.valid) {

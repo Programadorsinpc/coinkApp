@@ -5,15 +5,12 @@ import { UserData } from '../models/userData.model';
   providedIn: 'root',
 })
 export class UserDataService {
-  // Signal para el estado del usuario
   private userData = signal<UserData | null>(null);
   
-  // Signal para manejar errores
   private errorSignal = signal<string | null>(null);
 
   constructor() {
     try {
-      // Inicialización de los datos del usuario
       const initialUserData: UserData = {
         phoneNumber: undefined,
         docType: undefined,
@@ -31,7 +28,6 @@ export class UserDataService {
     }
   }
 
-  // Método para actualizar el número de teléfono
   setPhoneNumber(number: number): void {
     try {
       const currentUserData = this.userData();
@@ -48,7 +44,6 @@ export class UserDataService {
     }
   }
 
-  // Método para actualizar los datos de la cuenta del usuario
   setAccountData(data: Partial<UserData>): void {
     try {
       const currentUserData = this.userData();
@@ -65,7 +60,6 @@ export class UserDataService {
     }
   }
 
-  // Método para aceptar los términos y condiciones
   acceptTerms(): void {
     try {
       const currentUserData = this.userData();
@@ -82,7 +76,6 @@ export class UserDataService {
     }
   }
 
-  // Método para obtener los datos actuales del usuario (por si se necesita)
   getUserData(): UserData | null {
     try {
       return this.userData();
@@ -92,13 +85,11 @@ export class UserDataService {
     }
   }
 
-  // Método para manejar errores y actualizar el signal de error
   private handleError(message: string, error: any): void {
     console.error(message, error);
     this.errorSignal.set(`${message}: ${error.message || error}`);
   }
 
-  // Método para obtener el último error
   getError(): string | null {
     return this.errorSignal();
   }

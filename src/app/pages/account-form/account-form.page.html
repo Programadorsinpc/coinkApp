@@ -22,7 +22,6 @@
     spinner="crescent"
   ></ion-loading>
 
-  <!-- Mostrar mensaje de error global si existe -->
   <div *ngIf="errorMessage()" class="error-global">
     <ion-text color="danger">
       <p>{{ errorMessage() }}</p>

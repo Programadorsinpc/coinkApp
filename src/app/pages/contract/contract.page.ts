@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { UserDataService } from '../../services/user-data.service'; // Importamos el servicio
+import { UserDataService } from '../../services/user-data.service'; 
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './contract.page.html',
   styleUrls: ['./contract.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule], // Agregamos ReactiveFormsModule
+  imports: [IonicModule, CommonModule], 
 })
 export class ContractPage implements OnInit {
   private userDataService = inject(UserDataService);
@@ -17,7 +17,6 @@ export class ContractPage implements OnInit {
   private router = inject(Router);
 
   ngOnInit() {
-    // Cargar el estado inicial de acceptTerms desde el servicio, si está definido
     const userData = this.userDataService.getUserData();
     if (userData && userData.acceptTerms) {
       this.acceptContract = userData.acceptTerms;

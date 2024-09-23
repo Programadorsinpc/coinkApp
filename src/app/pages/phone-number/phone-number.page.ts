@@ -44,7 +44,7 @@ import { UserData } from 'src/app/models/userData.model';
 export class PhoneNumberPage {
   private userDataService = inject(UserDataService);
 
-  phoneNumber: string = ''; // Variable para almacenar el número de teléfono
+  phoneNumber: string = ''; 
   isValid: boolean = true;
 
   constructor(private router: Router) {
@@ -59,19 +59,16 @@ export class PhoneNumberPage {
     }
   }
 
-  // Método para agregar un número al input
   addNumber(num: string) {
     if (this.phoneNumber.length < 10) {
       this.phoneNumber += num;
     }
   }
 
-  // Método para eliminar el último dígito
   removeLastDigit() {
     this.phoneNumber = this.phoneNumber.slice(0, -1);
   }
 
-  // Método para confirmar el número
   confirmNumber() {
     console.log('Número confirmado:', this.phoneNumber);
     if (this.phoneNumber.length !== 10) {

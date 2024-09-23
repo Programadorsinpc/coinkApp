@@ -12,7 +12,6 @@ export class ApiService {
   private apiKey = '030106';
   private http = inject(HttpClient)
 
-  // Obtener tipos de documentos
   getDocumentTypes(): Observable<ApiResponse> {
     return this.http
       .get<ApiResponse>(`${this.apiUrl}/documentTypes?apiKey=${this.apiKey}`)
@@ -21,7 +20,6 @@ export class ApiService {
       );
   }
 
-  // Obtener géneros
   getGenders(): Observable<ApiResponse> { 
     return this.http
       .get<ApiResponse>(`${this.apiUrl}/genders?apiKey=${this.apiKey}`)
@@ -30,7 +28,6 @@ export class ApiService {
       );
   }
 
-  // Manejo de errores
   private handleError(error: any) {
     console.error('Error en la petición:', error);
     return throwError(() => new Error('Error en la API')); 

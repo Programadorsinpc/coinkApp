@@ -58,7 +58,6 @@ export class WelcomePage implements OnInit {
     }
 
     this.openModalOnInit();
-    // Si todos los datos están completos, mostrarlos en el log
     console.log('Datos del usuario:', userData);
   }
 
